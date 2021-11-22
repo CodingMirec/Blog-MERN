@@ -17,7 +17,7 @@ firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(serviceAccountKey)
 });
 
-// Connect to Mongoo
+// Connect to Mongo
 mongoose
     .connect(config.mongo.url, config.mongo.options)
     .then(() => {
@@ -77,6 +77,6 @@ router.use((req, res, next) => {
 // Listen to requests
 httpServer.listen(config.server.port, () => {
     logging.info(
-        `Server is running at ${config.server.host}:${config.server.port} ...`
+        `Server is running at ${config.server.host}:${config.server.port}...`
     );
 });
