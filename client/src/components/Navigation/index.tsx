@@ -6,10 +6,10 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 export interface INavigationProps {}
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false }
+    { name: 'Home', href: `/home`, current: true },
+    { name: 'Blog', href: '/blogs', current: false },
+    { name: 'Edit', href: '/blogs', current: false },
+    { name: 'Login', href: '/login', current: false }
 ];
 
 function classNames(...classes: any) {
@@ -196,3 +196,5 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
         </Disclosure>
     );
 };
+
+export default Navigation;
