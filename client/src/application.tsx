@@ -1,7 +1,12 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { Switch, RouteChildrenProps, Route } from 'react-router-dom';
+import LoadingComponent from './components/LoadingComponent';
 import routes from './config/routes';
-import { initialUserState, userReducer } from './contexts/user';
+import UserContext, {
+    initialUserState,
+    UserContextProvider,
+    userReducer
+} from './contexts/user';
 
 export interface IApplicationProps {}
 
@@ -50,23 +55,26 @@ const Application: React.FunctionComponent<IApplicationProps> = (props) => {
     };
 
     if (loading) {
+        return <LoadingComponent>{authStage}</LoadingComponent>;
     }
 
     return (
-        <Switch>
-            {routes.map((route, index) => {
-                return (
-                    <Route
-                        key={index}
-                        exact={route.exact}
-                        path={route.path}
-                        render={(routeProps: RouteChildrenProps<any>) => (
-                            <route.component {...routeProps} />
-                        )}
-                    />
-                );
-            })}
-        </Switch>
+        <UserContextProvider value={userContextValues}>
+            <Switch>
+                {routes.map((route, index) => {
+                    return (
+                        <Route
+                            key={index}
+                            exact={route.exact}
+                            path={route.path}
+                            render={(routeProps: RouteChildrenProps<any>) => (
+                                <route.component {...routeProps} />
+                            )}
+                        />
+                    );
+                })}
+            </Switch>
+        </UserContextProvider>
     );
 };
 
